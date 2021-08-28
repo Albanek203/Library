@@ -1,5 +1,5 @@
 ﻿namespace Library.Data.Enumeration {
     public enum TypeWindow {
-        ErrorWindow
+        ErrorWindow, Information
     }
 }

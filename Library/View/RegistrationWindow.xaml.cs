@@ -92,7 +92,7 @@ namespace Library.View {
                     user.SubscriptionValidUntil = date;
                     var result = _loginService.Register(user);
                     if (result) {
-                        MessageBox.Show("Success"); // Information
+                        MessageWindow.Show(this, "Success", TypeWindow.Information, MessageButton.Ok);
                         DialogResult = true;
                     }
                     else

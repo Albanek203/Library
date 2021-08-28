@@ -74,8 +74,8 @@
             <Setter Property="BorderBrush" Value="#82b3c9" />
             <Setter Property="Foreground" Value="#373737" />
             <Setter Property="Margin" Value="10,0" />
-            <Setter Property="CaretBrush" Value="Brown" />
-            <Setter Property="SelectionBrush" Value="#bc477b" />
+            <Setter Property="CaretBrush" Value="#007ac1" />
+            <Setter Property="SelectionBrush" Value="#03a9f4" />
         </Style.Setters>
     </Style>
     <Style x:Key="InputPasswordBoxStyle" TargetType="PasswordBox"
@@ -84,8 +84,8 @@
             <Setter Property="BorderBrush" Value="#82b3c9" />
             <Setter Property="Foreground" Value="#373737" />
             <Setter Property="Margin" Value="10,0" />
-            <Setter Property="CaretBrush" Value="Brown" />
-            <Setter Property="SelectionBrush" Value="#bc477b" />
+            <Setter Property="CaretBrush" Value="#007ac1" />
+            <Setter Property="SelectionBrush" Value="#03a9f4" />
         </Style.Setters>
     </Style>
     <Style x:Key="PickIconStyle" TargetType="materialDesign:PackIcon">

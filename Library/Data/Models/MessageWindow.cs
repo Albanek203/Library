@@ -9,16 +9,22 @@ namespace Library.Data.Models {
             window.Effect = objBlur;
         }
         public static bool Show(Window ownWindow, string message, TypeWindow type, MessageButton messageButton) {
-            switch (type) {
-                case TypeWindow.ErrorWindow:
-                    ApplyEffect(ownWindow, 100);
-                    var window = new ErrorWindow(message, messageButton) { Owner = ownWindow };
-                    var result = window.ShowDialog();
-                    ApplyEffect(ownWindow, 0);
-                    return result == true;
+            var result = false;
+            if (type == TypeWindow.ErrorWindow) {
+                ApplyEffect(ownWindow, 100);
+                var errorWindow = new ErrorWindow(message, messageButton) { Owner = ownWindow };
+                // ReSharper disable once PossibleInvalidOperationException
+                result = (bool)errorWindow.ShowDialog();
+                ApplyEffect(ownWindow, 0);
             }
-
-            return false;
+            else if (type == TypeWindow.Information) {
+                ApplyEffect(ownWindow, 100);
+                var informationWindow = new InformationWindow(message, messageButton) { Owner = ownWindow };
+                // ReSharper disable once PossibleInvalidOperationException
+                result = (bool)informationWindow.ShowDialog();
+                ApplyEffect(ownWindow, 0);
+            }
+            return result;
         }
     }
 }
