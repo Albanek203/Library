@@ -4,9 +4,79 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Library.View"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        WindowStartupLocation="CenterScreen"
+        Style="{DynamicResource WindowStyle}"
+        Title="MainWindow" Height="720" Width="1280">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Data/Themes/Dark.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Style="{DynamicResource BackgroundGridStyle}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0" Height="50">
+            <Button DockPanel.Dock="Left"
+                    Style="{DynamicResource CloseButtonStyle}"
+                    Click="ButtonClose_OnClick" />
+            <Button DockPanel.Dock="Left"
+                    Margin="0,5,0,0"
+                    Style="{DynamicResource CollapseButtonStyle}"
+                    Click="ButtonCollapse_OnClick" />
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        DockPanel.Dock="Right">
+                <Button ToolTip="Global"
+                        Style="{DynamicResource ButtonLibraryHeadStyle}"
+                        Click="ButtonGlobalPage_OnClick">
+                    <materialDesign:PackIcon Kind="Globe" Width="40" Height="40"
+                                             Style="{DynamicResource PickIconStyle}" />
+                </Button>
+                <Button ToolTip="Books"
+                        Style="{DynamicResource ButtonLibraryHeadStyle}"
+                        Click="ButtonBooksPage_OnClick">
+                    <materialDesign:PackIcon Kind="Book" Width="40" Height="40" Style="{DynamicResource PickIconStyle}" />
+                </Button>
+                <Button ToolTip="Account"
+                        Style="{DynamicResource ButtonLibraryHeadStyle}"
+                        Click="ButtonAccount_OnClick">
+                    <materialDesign:PackIcon Kind="AccountCircle" Width="40" Height="40"
+                                             Style="{DynamicResource PickIconStyle}" />
+                </Button>
+                <Button Name="ButtonAdminTools"
+                        ToolTip="Admin Tools"
+                        Style="{DynamicResource ButtonLibraryHeadStyle}"
+                        Click="ButtonAdministrator_OnClick">
+                    <materialDesign:PackIcon Kind="CrownOutline" Width="40" Height="40" Foreground="Gold" />
+                </Button>
+
+                <Rectangle Width="5" Margin="20,0,20,0" Fill="#50010101" />
+
+                <Ellipse Height="40" Width="40"
+                         Name="UserIco"
+                         ToolTip="User Photo">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="../Data/Images/unknowUser.jpeg" />
+                    </Ellipse.Fill>
+                </Ellipse>
+                <TextBlock Name="UserName"
+                           ToolTip="User name"
+                           Margin="20,0,20,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Style="{DynamicResource  TextStyle}" />
+            </StackPanel>
+        </DockPanel>
+        <Border Grid.Row="1" Style="{DynamicResource BorderMainBgGridStyle}">
+            <Frame Name="PagesFrame"
+                   NavigationUIVisibility="Hidden" />
+        </Border>
     </Grid>
 </Window>

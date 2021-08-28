@@ -9,6 +9,8 @@ namespace Library.Infrastructure {
             services.AddTransient(x => new SqlConnection(connectionStr));
             services.AddTransient<LoginRepository>();
             services.AddTransient<LoginService>();
+            services.AddTransient<UserRepository>();
+            services.AddTransient<UserService>();
         }
     }
 }

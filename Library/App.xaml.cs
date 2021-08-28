@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Windows;
+using Library.Data.Models;
 using Library.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using Library.View;
@@ -23,7 +24,9 @@ namespace Library {
             serviceProvider.AddSingleton<ViewModelTheme>();
             serviceProvider.AddTransient<ViewModelRegisterUser>();
             serviceProvider.AddTransient<RegistrationWindow>();
+            serviceProvider.AddSingleton<User>();
             serviceProvider.AddTransient<LoginWindow>();
+            serviceProvider.AddTransient<MainWindow>();
         }
         private void App_OnStartup(object sender, StartupEventArgs e) {
             var loginWindow = ServiceProvider.GetService<LoginWindow>();

@@ -12,11 +12,20 @@ namespace Library.View {
     /// Interaction logic for LoginWindow.xaml
     /// </summary>
     public partial class LoginWindow {
-        private readonly LoginService _loginService;
-        public LoginWindow(ViewModelTheme viewModelTheme, LoginService loginService) {
+        private readonly LoginService   _loginService;
+        private readonly ViewModelTheme _viewModelTheme;
+        private readonly UserService    _userService;
+        private readonly MainWindow     _mainWindow;
+        private          User           _user;
+        public LoginWindow(ViewModelTheme viewModelTheme, LoginService loginService, UserService userService, User user
+                         , MainWindow     mainWindow) {
             InitializeComponent();
-            DataContext   = viewModelTheme;
-            _loginService = loginService;
+            DataContext     = viewModelTheme;
+            _loginService   = loginService;
+            _viewModelTheme = viewModelTheme;
+            _userService    = userService;
+            _user           = user;
+            _mainWindow     = mainWindow;
         }
 
 #region Window Control
@@ -35,7 +44,8 @@ namespace Library.View {
 
             var success = _loginService.Login(TxtUserLogin.Text, TxtUserPassword.Password);
             if (success > 0) {
-                new MainWindow().Show();
+                _user = _userService.Find(new User { UserId = success });
+                _mainWindow.Show();
                 Close();
                 return;
             }
@@ -49,9 +59,8 @@ namespace Library.View {
             Show();
         }
         private void ThemeSelector_OnSelectionChanged(object sender, SelectionChangedEventArgs e) {
-            var themeId        = ThemeSelector.SelectedIndex;
-            var viewModelTheme = App.ServiceProvider.GetService<ViewModelTheme>();
-            viewModelTheme?.ChangeTheme((Themes)themeId);
+            var themeId = ThemeSelector.SelectedIndex;
+            _viewModelTheme.ChangeTheme((Themes)themeId);
         }
     }
 }
