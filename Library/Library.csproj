@@ -28,7 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\Enumeration\" />
     <Folder Include="Data\Abstract\" />
   </ItemGroup>
 

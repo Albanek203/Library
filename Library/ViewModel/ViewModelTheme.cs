@@ -16,7 +16,7 @@ namespace Library.ViewModel {
         public ObservableCollection<object> ThemesList { get; }
         public ViewModelTheme() {
             ThemesList = new ObservableCollection<object>();
-            foreach(var i in Enum.GetValues(typeof(Themes))) { ThemesList.Add(i); }
+            foreach (var i in Enum.GetValues(typeof(Themes))) { ThemesList.Add(i); }
             Theme = Themes.Dark;
             ChangeTheme(Theme);
         }

@@ -1,6 +1,8 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Library.Data.Service {
     public static class MailService {
@@ -13,6 +15,11 @@ namespace Library.Data.Service {
             Task.Factory.StartNew(() => {
                 client.Send(Email, recipient, subject, body);
             });
+        }
+        public static void SendCode(string email, string code) {
+            try {
+                SendMessage(email, "Code", $"Code:{code}");
+            } catch (Exception e) { MessageBox.Show(e.Message); }
         }
     }
 }

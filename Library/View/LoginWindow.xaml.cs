@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using Library.Data.Enumeration;
+using Library.Data.Models;
 using Library.Data.Service;
 using Library.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,34 +12,35 @@ namespace Library.View {
     /// Interaction logic for LoginWindow.xaml
     /// </summary>
     public partial class LoginWindow {
-        private readonly LoginService       _loginService;
+        private readonly LoginService _loginService;
         public LoginWindow(ViewModelTheme viewModelTheme, LoginService loginService) {
             InitializeComponent();
-            DataContext = viewModelTheme;
+            DataContext   = viewModelTheme;
             _loginService = loginService;
         }
 
-        #region Window Control
-        private void ButtonClose_OnClick(object sender, RoutedEventArgs e) { Application.Current.Shutdown(); }
+#region Window Control
+        private void ButtonClose_OnClick(object    sender, RoutedEventArgs e) { Application.Current.Shutdown(); }
         private void ButtonCollapse_OnClick(object sender, RoutedEventArgs e) { WindowState = WindowState.Minimized; }
-        private void UILogin_OnMouseDown(object sender, MouseButtonEventArgs e) { if(e.LeftButton == MouseButtonState.Pressed) DragMove(); }
-
-        #endregion
+        private void UILogin_OnMouseDown(object sender, MouseButtonEventArgs e) {
+            if (e.LeftButton == MouseButtonState.Pressed) DragMove();
+        }
+#endregion
 
         private void ButtonLogin_OnClick(object sender, RoutedEventArgs e) {
-            if(string.IsNullOrWhiteSpace(TxtUserLogin.Text) || string.IsNullOrWhiteSpace(TxtUserPassword.Password)) {
-                MessageBox.Show("You have not entered a value");
+            if (string.IsNullOrWhiteSpace(TxtUserLogin.Text) || string.IsNullOrWhiteSpace(TxtUserPassword.Password)) {
+                MessageWindow.Show(this, "You have not entered a value", TypeWindow.ErrorWindow, MessageButton.Ok);
                 return;
             }
 
             var success = _loginService.Login(TxtUserLogin.Text, TxtUserPassword.Password);
-            if(success > 0) {
+            if (success > 0) {
                 new MainWindow().Show();
                 Close();
+                return;
             }
-            else {
-                MessageBox.Show("Invalid Login or Password.\nPlease try again.");
-            }
+            MessageWindow.Show(this, "Invalid Login or Password.\nPlease try again.", TypeWindow.ErrorWindow
+                             , MessageButton.Ok);
         }
         private void CreateAccount_OnMouseDown(object sender, MouseButtonEventArgs e) {
             Hide();

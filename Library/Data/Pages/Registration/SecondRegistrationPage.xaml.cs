@@ -11,7 +11,7 @@ namespace Library.Data.Pages.Registration {
         private readonly ViewModelRegisterUser _viewModelRegisterUser;
         public SecondRegistrationPage(ViewModelRegisterUser viewModelRegisterUser) {
             InitializeComponent();
-            DataContext = viewModelRegisterUser;
+            DataContext            = viewModelRegisterUser;
             _viewModelRegisterUser = viewModelRegisterUser;
         }
         private void TxtUserPassword_OnPasswordChanged(object sender, RoutedEventArgs e) {

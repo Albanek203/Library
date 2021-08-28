@@ -53,6 +53,13 @@
             <Setter Property="FontFamily" Value="Calibri Bold" />
         </Style.Setters>
     </Style>
+    <Style x:Key="TextStyle" TargetType="TextBlock">
+        <Style.Setters>
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="Foreground" Value="WhiteSmoke" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style.Setters>
+    </Style>
     <Style x:Key="InputBorderStyle" TargetType="Border">
         <Style.Setters>
             <Setter Property="Background" Value="#181818" />

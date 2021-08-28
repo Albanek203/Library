@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Configuration;
 using System.Windows;
-using Library.Data.Pages.Registration;
 using Library.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using Library.View;
@@ -19,13 +18,13 @@ namespace Library {
             ServiceProvider = servicesCollection.BuildServiceProvider();
         }
         private static void ConfigServices(IServiceCollection serviceProvider) {
-            BllConfigureService.ConfigureService(serviceProvider, ConfigurationManager.ConnectionStrings["testConnection"].ConnectionString);
+            BllConfigureService.ConfigureService(serviceProvider
+                                               , ConfigurationManager.ConnectionStrings["testConnection"].ConnectionString);
             serviceProvider.AddSingleton<ViewModelTheme>();
             serviceProvider.AddTransient<ViewModelRegisterUser>();
             serviceProvider.AddTransient<RegistrationWindow>();
             serviceProvider.AddTransient<LoginWindow>();
         }
-
         private void App_OnStartup(object sender, StartupEventArgs e) {
             var loginWindow = ServiceProvider.GetService<LoginWindow>();
             loginWindow?.Show();
