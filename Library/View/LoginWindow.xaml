@@ -1,0 +1,81 @@
+﻿<Window x:Class="Library.View.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:viewModel="clr-namespace:Library.ViewModel"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Style="{DynamicResource WindowStyle}"
+        Title="LoginWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <viewModel:ViewModelTheme />
+    </Window.DataContext>
+
+    <Grid Style="{DynamicResource BackgroundGridStyle}"
+          MouseLeftButtonDown="UILogin_OnMouseDown">
+        <Border Style="{DynamicResource BorderBgGridStyle}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="350" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0"
+                        Style="{DynamicResource CloseButtonStyle}"
+                        Click="ButtonClose_OnClick" />
+                <Button Grid.Column="0"
+                        Style="{DynamicResource CollapseButtonStyle}"
+                        Click="ButtonCollapse_OnClick" />
+                <Image Grid.Column="0"
+                       Source="../Data/Images/ImageLogo.png" />
+                <StackPanel Grid.Column="1">
+                    <TextBlock Text="User Login"
+                               Margin="20"
+                               Style="{DynamicResource TitleText}" />
+                    <Border Name="BorderLogin"
+                            Style="{DynamicResource InputBorderStyle}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="User" Width="30" Height="30"
+                                                     Style="{DynamicResource PickIconStyle}" />
+                            <TextBox Name="TxtUserLogin"
+                                     Width="250"
+                                     materialDesign:HintAssist.Hint="Enter Login / Email"
+                                     Style="{DynamicResource InputTextBoxStyle}" />
+                        </StackPanel>
+                    </Border>
+                    <Border Name="BorderPassword"
+                            Style="{DynamicResource InputBorderStyle}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Lock" Width="30" Height="30"
+                                                     Style="{DynamicResource PickIconStyle}" />
+                            <PasswordBox Name="TxtUserPassword"
+                                         Width="250"
+                                         materialDesign:HintAssist.Hint="Enter Password"
+                                         Style="{DynamicResource InputPasswordBoxStyle}" />
+                        </StackPanel>
+                    </Border>
+                    <Button Content="Login"
+                            Height="45"
+                            Width="200"
+                            Margin="0,20"
+                            materialDesign:ButtonAssist.CornerRadius="20"
+                            Style="{DynamicResource ButtonStyle}"
+                            Click="ButtonLogin_OnClick" />
+                    <TextBlock Text="I don't have account"
+                               Style="{DynamicResource ClickableTextStyle}"
+                               MouseDown="CreateAccount_OnMouseDown" />
+                </StackPanel>
+                <ComboBox Grid.Column="2"
+                          Name="ThemeSelector"
+                          HorizontalAlignment="Right"
+                          VerticalAlignment="Top"
+                          SelectedIndex="1"
+                          Style="{DynamicResource ThemeSelectorStyle}"
+                          ItemsSource="{Binding ThemesList }"
+                          SelectionChanged="ThemeSelector_OnSelectionChanged" />
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

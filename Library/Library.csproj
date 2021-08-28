@@ -6,4 +6,32 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Data\Images\Icon.png" />
+    <None Remove="Data\Images\ImageLogo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Data\Images\Icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Images\ImageLogo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MaterialDesignColors" Version="2.0.1" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.1.0" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\Enumeration\" />
+    <Folder Include="Data\Interfaces\" />
+    <Folder Include="Data\Abstract\" />
+    <Folder Include="Infrastructure\" />
+  </ItemGroup>
+
 </Project>
