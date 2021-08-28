@@ -1,0 +1,65 @@
+﻿<Page x:Class="Library.Data.Pages.Registration.SecondRegistrationPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      Title="SecondRegistrationPage"
+      d:DesignHeight="250" d:DesignWidth="730">
+
+    <StackPanel HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+        <StackPanel Orientation="Horizontal">
+            <Border Style="{DynamicResource InputBorderStyle}">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="User" Width="30" Height="30"
+                                             Style="{DynamicResource PickIconStyle}" />
+                    <TextBox Name="TxtUserLogin"
+                             Width="250"
+                             Text="{Binding UserLogin,ValidatesOnExceptions=True, 
+                             UpdateSourceTrigger=PropertyChanged}"
+                             materialDesign:HintAssist.Hint="Enter Login"
+                             Style="{DynamicResource InputTextBoxStyle}"
+                             PreviewTextInput="TxtUserLogin_OnPreviewTextInput"/>
+                </StackPanel>
+            </Border>
+            <Border Style="{DynamicResource InputBorderStyle}">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="Email" Width="30" Height="30"
+                                             Style="{DynamicResource PickIconStyle}" />
+                    <TextBox Name="TxtUserSurname"
+                             Width="250"
+                             Text="{Binding UserEmail,ValidatesOnExceptions=True, 
+                             UpdateSourceTrigger=PropertyChanged}"
+                             materialDesign:HintAssist.Hint="Enter Email"
+                             Style="{DynamicResource InputTextBoxStyle}" />
+                </StackPanel>
+            </Border>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Border Style="{DynamicResource InputBorderStyle}">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="Password" Width="30" Height="30"
+                                             Style="{DynamicResource PickIconStyle}" />
+                    <PasswordBox Name="TxtUserPassword"
+                                 Width="250"
+                                 materialDesign:HintAssist.Hint="Enter Password"
+                                 Style="{DynamicResource InputPasswordBoxStyle}"
+                                 PasswordChanged="TxtUserPassword_OnPasswordChanged" />
+                </StackPanel>
+            </Border>
+            <Border Style="{DynamicResource InputBorderStyle}">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="Password" Width="30" Height="30"
+                                             Style="{DynamicResource PickIconStyle}" />
+                    <PasswordBox Name="TxtConfirmation"
+                                 Width="250"
+                                 materialDesign:HintAssist.Hint="Confirmation"
+                                 Style="{DynamicResource InputPasswordBoxStyle}"
+                                 PasswordChanged="TxtConfirmation_OnPasswordChanged" />
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </StackPanel>
+</Page>

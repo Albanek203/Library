@@ -29,9 +29,7 @@
 
   <ItemGroup>
     <Folder Include="Data\Enumeration\" />
-    <Folder Include="Data\Interfaces\" />
     <Folder Include="Data\Abstract\" />
-    <Folder Include="Infrastructure\" />
   </ItemGroup>
 
 </Project>

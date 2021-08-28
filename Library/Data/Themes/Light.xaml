@@ -128,8 +128,7 @@
         <Setter Property="Margin" Value="30,5,0,0" />
         <Setter Property="ToolTip" Value="Collapse" />
     </Style>
-    <Style x:Key="ThemeSelectorStyle" TargetType="ComboBox"
-           BasedOn="{StaticResource MaterialDesignFilledComboBox }">
+    <Style x:Key="ThemeSelectorStyle" TargetType="ComboBox" BasedOn="{StaticResource MaterialDesignFilledComboBox}">
         <Style.Setters>
             <Setter Property="Foreground" Value="Black" />
             <Setter Property="Height" Value="35" />

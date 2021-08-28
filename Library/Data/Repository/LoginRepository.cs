@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Data;
+using Library.Data.Interfaces;
 using Library.Data.Models;
 using Microsoft.Data.SqlClient;
 
 namespace Library.Data.Repository {
-    public class LoginRepository {
+    public class LoginRepository : IRepositoryIsExists<User>, IRepositoryLogin<User> {
         private readonly SqlConnection _sqlConnection;
         public LoginRepository(SqlConnection sqlConnection) { _sqlConnection = sqlConnection; }
         //
-        public int Login(string login, string password) {
-            if(login.Contains("@")) {
+        public int Login(User user) {
+            if(!string.IsNullOrEmpty(user.Email)) {
                 var cmd = new SqlCommand("SelectUserByLoginDataEmail", _sqlConnection);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@Email", login);
-                cmd.Parameters.AddWithValue("@Password", Encipher.Encrypt(password, 24));
+                cmd.Parameters.AddWithValue("@Email", user.Email);
+                cmd.Parameters.AddWithValue("@Password", Encipher.Encrypt(user.Password, 24));
                 _sqlConnection.Open();
                 var res = cmd.ExecuteScalar();
                 _sqlConnection.Close();
@@ -22,8 +23,8 @@ namespace Library.Data.Repository {
             else {
                 var cmd = new SqlCommand("SelectUserByLoginDataLogin", _sqlConnection);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@Login", login);
-                cmd.Parameters.AddWithValue("@Password", Encipher.Encrypt(password, 24));
+                cmd.Parameters.AddWithValue("@Login", user.Login);
+                cmd.Parameters.AddWithValue("@Password", Encipher.Encrypt(user.Password, 24));
                 _sqlConnection.Open();
                 var res = cmd.ExecuteScalar();
                 _sqlConnection.Close();
@@ -40,7 +41,7 @@ namespace Library.Data.Repository {
             if(res != 0) { return false; }
 
             sqlString = "INSERT LoginData([Email],[Login],[Password]) OUTPUT INSERTED.Id " +
-                        "VALUES (@Login,@Email,@Password)";
+                        "VALUES (@Email,@Login,@Password)";
             cmd = new SqlCommand(sqlString, _sqlConnection);
             cmd.Parameters.AddWithValue("@Login", user.Login);
             cmd.Parameters.AddWithValue("@Email", user.Email);
@@ -71,6 +72,17 @@ namespace Library.Data.Repository {
             cmd.ExecuteNonQuery();
             _sqlConnection.Close();
             return true;
+        }
+        public bool IsExists(User user) {
+            var sqlString = $" SELECT COUNT(*) FROM Users INNER JOIN LoginData ON LoginData.Id = Users.LoginDataId " +
+                            $"where Login = @Login or Email = @Email";
+            var cmd = new SqlCommand(sqlString, _sqlConnection);
+            cmd.Parameters.AddWithValue("@Login", user.Login);
+            cmd.Parameters.AddWithValue("@Email", user.Email);
+            _sqlConnection.Open();
+            var res = Convert.ToInt32(cmd.ExecuteScalar());
+            _sqlConnection.Close();
+            return res != 0;
         }
     }
 }
