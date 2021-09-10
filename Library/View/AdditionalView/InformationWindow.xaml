@@ -20,6 +20,7 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center">
                 <TextBlock Name="TxtInformation"
+                           TextWrapping="Wrap"
                            Style="{DynamicResource TextStyle}" />
             </StackPanel>
             <StackPanel Grid.Row="1" Orientation="Horizontal"
