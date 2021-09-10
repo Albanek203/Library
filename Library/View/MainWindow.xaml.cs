@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
 using Library.Data.Pages.Library;
 using Library.View.AdditionalView;
@@ -18,8 +19,13 @@ namespace Library.View {
             if (viewModelUser.CurrentUser.Image is not null)
                 UserIco.Fill = new ImageBrush { ImageSource = viewModelUser.CurrentUser.Image.Source };
         }
-        private void ButtonClose_OnClick(object    sender, RoutedEventArgs e) { Application.Current.Shutdown(); }
+
+#region Window Control
+        private void MainWindow_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e) { DragMove(); }
+        private void ButtonClose_OnClick(object sender, RoutedEventArgs e) { Application.Current.Shutdown(); }
         private void ButtonCollapse_OnClick(object sender, RoutedEventArgs e) { WindowState = WindowState.Minimized; }
+#endregion
+
         private void ButtonGlobalPage_OnClick(object sender, RoutedEventArgs e) {
             var globalLibraryPage = App.ServiceProvider.GetService<GlobalLibraryPage>();
             PagesFrame.Content = globalLibraryPage;

@@ -1,21 +1,27 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using Library.Data.Enumeration;
 using Library.Data.Models;
 using Library.Data.Service;
 
 namespace Library.Data.Pages.Library {
     public partial class BooksLibraryPage {
-        private readonly BookService                _bookService;
+        private readonly ReceivedBooksService _receivedBooksService;
+        private readonly BookService _bookService;
         private readonly ObservableCollection<Book> _currentListBook;
-        public BooksLibraryPage(BookService   bookService, BookCategoriesService bookCategoriesService
-                              , AuthorService authorService) {
+        private readonly User _user;
+        public BooksLibraryPage(User          user, BookService bookService, BookCategoriesService bookCategoriesService
+                              , AuthorService authorService, ReceivedBooksService receivedBooksService) {
             InitializeComponent();
-            _bookService = bookService;
+            _user                 = user;
+            _bookService          = bookService;
+            _receivedBooksService = receivedBooksService;
 
             var lstBooks       = bookService?.FindAll(null);
             var lstCategories  = bookCategoriesService?.FindAll();
@@ -29,9 +35,9 @@ namespace Library.Data.Pages.Library {
             CmbGroupByCategories.Items.Add("None");
             CmbGroupByAuthor.Items.Add("None");
 
-            if (lstCategories != null) {
+            if (lstCategories != null)
                 foreach (var categories in lstCategories) { CmbGroupByCategories.Items.Add(categories); }
-            }
+
             foreach (var author in lstNameAuthors) { CmbGroupByAuthor.Items.Add(author); }
             ShowBooks(lstBooks);
         }
@@ -63,8 +69,7 @@ namespace Library.Data.Pages.Library {
               , Style             = FindResource("ButtonStyle") as Style
             };
             innerButton.Click += BuyBook_OnClick;
-            button.Content =
-                new StackPanel {
+            button.Content = new StackPanel {
                 Children = {
                     new StackPanel {
                         Children = {
@@ -104,12 +109,46 @@ namespace Library.Data.Pages.Library {
                 }
             };
         }
-        // 
-        //
-        //  Must 
-        //
-        //
-        private void BuyBook_OnClick(object sender, RoutedEventArgs e) { }
+        private void BuyBook_OnClick(object sender, RoutedEventArgs e) {
+            if (_user.Money < 20) {
+                MessageWindow.Show(null, "Not enough money\r\nTop up and try again\r\nCost:20$", TypeWindow.ErrorWindow
+                                 , MessageButton.Ok);
+                return;
+            }
+            var lstReceivedBooks = _receivedBooksService.FindAll(new ReceivedBook { User = _user }).ToArray();
+            switch (_user.SubscriptionName) {
+                case SubscriptionNames.Default:
+                    if (lstReceivedBooks.Any()) {
+                        MessageWindow.Show(null, "Your subscription allows you to take only 1 book"
+                                         , TypeWindow.ErrorWindow, MessageButton.Ok);
+                        return;
+                    }
+                    break;
+                case SubscriptionNames.Silver:
+                    if (lstReceivedBooks.Count() >= 10) {
+                        MessageWindow.Show(null, "Your subscription allows you to take only 10 book"
+                                         , TypeWindow.ErrorWindow, MessageButton.Ok);
+                        return;
+                    }
+                    break;
+                case SubscriptionNames.Gold:
+                    if (lstReceivedBooks.Count() >= 20) {
+                        MessageWindow.Show(null, "Your subscription allows you to take only 20 book"
+                                         , TypeWindow.ErrorWindow, MessageButton.Ok);
+                        return;
+                    }
+                    break;
+                case SubscriptionNames.Diamond:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            var book = (Book)((Button)sender).Tag;
+            var issuance = new ReceivedBook {
+                User = _user, Book = book, ReceivingDate = DateTime.Now, DeliveryDate = DateTime.Now.AddMonths(1)
+            };
+            _receivedBooksService.Add(issuance);
+        }
         private void BookImg_OnMouseLeave(object sender, MouseEventArgs e) {
             var button = (Button)sender;
             button.Content = "";
