@@ -17,5 +17,7 @@ namespace Library.Data.Service {
         public void ChangePassword(int userId, string newPassword) =>
             _userRepository.ChangePassword(userId, newPassword);
         public void AddAdvancedAccess(int userId) => _userRepository.AddAdvancedAccess(userId);
+        //
+        public void ReplenishMoney(int userId, string money) => _userRepository.ReplenishMoney(userId, money);
     }
 }

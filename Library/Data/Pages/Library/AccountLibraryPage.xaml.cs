@@ -4,6 +4,8 @@ using System.Windows.Media;
 using System.Windows.Media.Effects;
 using Library.Data.Enumeration;
 using Library.Data.Pages.Account;
+using Library.Data.Service;
+using Library.View.AdditionalView;
 using Library.ViewModel;
 using MaterialDesignThemes.Wpf;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,9 +14,11 @@ using Microsoft.Win32;
 namespace Library.Data.Pages.Library {
     public partial class AccountLibraryPage {
         private readonly ViewModelUser _viewModelUser;
-        public AccountLibraryPage(ViewModelUser viewModelUser) {
+        private readonly UserService   _userService;
+        public AccountLibraryPage(ViewModelUser viewModelUser, UserService userService) {
             InitializeComponent();
             _viewModelUser = viewModelUser;
+            _userService   = userService;
             DataContext    = _viewModelUser;
 
             var receivedBooksPage = App.ServiceProvider.GetService<ReceivedBooksPage>();
@@ -69,6 +73,13 @@ namespace Library.Data.Pages.Library {
         private void OpenReceivedList_OnClick(object sender, RoutedEventArgs e) {
             var receivedBooksPage = App.ServiceProvider.GetService<ReceivedBooksPage>();
             AccountFrame.Content = receivedBooksPage;
+        }
+        private void ReplenishFunds_OnClick(object sender, RoutedEventArgs e) {
+            var inputWindowCard = new InputWindow("Enter the card number:", MessageButton.CancelApply);
+            if (inputWindowCard.ShowDialog() == false) return;
+            var inputWindowAmount = new InputWindow("Enter the amount:", MessageButton.CancelApply);
+            if (inputWindowAmount.ShowDialog() == false) return;
+            _userService.ReplenishMoney(_viewModelUser.CurrentUser.UserId, inputWindowAmount.Result);
         }
     }
 }

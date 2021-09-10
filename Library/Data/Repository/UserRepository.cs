@@ -11,7 +11,7 @@ using Microsoft.Data.SqlClient;
 namespace Library.Data.Repository {
     public class UserRepository : IRepository<User>, IRepositoryIsExists<int> {
         private readonly SqlConnection _sqlConnection;
-        public UserRepository(SqlConnection sql_sqlConnection) { _sqlConnection = sql_sqlConnection; }
+        public UserRepository(SqlConnection sqlConnection) { _sqlConnection = sqlConnection; }
         //
         public void Add(User data) {
             /*Ignore*/
@@ -192,6 +192,24 @@ namespace Library.Data.Repository {
             cmd       = new SqlCommand(sqlString, _sqlConnection);
             cmd.Parameters.AddWithValue("@Password",    Encipher.Encrypt(newPassword, 24));
             cmd.Parameters.AddWithValue("@LoginDataId", loginDataId);
+            _sqlConnection.Open();
+            cmd.ExecuteNonQuery();
+            _sqlConnection.Close();
+        }
+        public void ReplenishMoney(int userId, string dataMoney) {
+            var sqlString = $"SELECT Money FROM Users WHERE Users.Id = @UserId";
+            var cmd       = new SqlCommand(sqlString, _sqlConnection);
+            cmd.Parameters.AddWithValue("@UserId", userId);
+            _sqlConnection.Open();
+            var curMoney = Convert.ToInt32(cmd.ExecuteScalar());
+            _sqlConnection.Close();
+
+            int.TryParse(dataMoney, out var moneyAdded);
+            var money = moneyAdded + curMoney;
+            sqlString = $"UPDATE Users SET Money = @Money WHERE Users.Id = @UserId";
+            cmd       = new SqlCommand(sqlString, _sqlConnection);
+            cmd.Parameters.AddWithValue("@Money",  money);
+            cmd.Parameters.AddWithValue("@UserId", userId);
             _sqlConnection.Open();
             cmd.ExecuteNonQuery();
             _sqlConnection.Close();

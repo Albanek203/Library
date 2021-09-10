@@ -78,6 +78,15 @@
                             <materialDesign:PackIcon Kind="CogOutline" Width="50" Height="50"
                                                      Style="{DynamicResource  PickIconStyle}" />
                         </Button>
+                        <Button ToolTip="Replenish funds"
+                                Margin="10"
+                                Height="60"
+                                Width="60"
+                                Style="{DynamicResource ButtonLibraryHeadStyle}"
+                                Click="ReplenishFunds_OnClick">
+                            <materialDesign:PackIcon Kind="AttachMoney" Width="50" Height="50"
+                                                     Style="{DynamicResource  PickIconStyle}" />
+                        </Button>
                     </StackPanel>
                     <Frame Name="AccountFrame"
                            Height="470"
