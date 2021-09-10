@@ -23,7 +23,7 @@ namespace Library {
         }
         private static void ConfigServices(IServiceCollection serviceProvider) {
             BllConfigureService.ConfigureService(serviceProvider
-                                               , ConfigurationManager.ConnectionStrings["testConnection"].ConnectionString);
+                                               , ConfigurationManager.ConnectionStrings["baseConnection"].ConnectionString);
             serviceProvider.AddSingleton<ViewModelTheme>();
             serviceProvider.AddSingleton<User>();
             serviceProvider.AddSingleton<ViewModelUser>();
