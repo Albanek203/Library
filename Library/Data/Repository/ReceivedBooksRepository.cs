@@ -30,12 +30,12 @@ namespace Library.Data.Repository {
             _sqlConnection.Close();
             if (count == 1) { return; }
 
-            sqlString = "INSERT ReceivedBooks([BookId],[UserId],[IssueDate],[DeliveryDate]) VALUES " +
-                        $"(@BookId,@UserId,@IssueDate,@DeliveryDate)";
+            sqlString = "INSERT ReceivedBooks([BookId],[UserId],[ReceivingDate],[DeliveryDate]) VALUES " +
+                        $"(@BookId,@UserId,@ReceivingDate,@DeliveryDate)";
             cmd = new SqlCommand(sqlString, _sqlConnection);
             cmd.Parameters.AddWithValue("@BookId",       bookId);
             cmd.Parameters.AddWithValue("@UserId",       data.User.UserId);
-            cmd.Parameters.AddWithValue("@IssueDate",    data.ReceivingDate);
+            cmd.Parameters.AddWithValue("@ReceivingDate",    data.ReceivingDate);
             cmd.Parameters.AddWithValue("@DeliveryDate", data.DeliveryDate);
             _sqlConnection.Open();
             cmd.ExecuteNonQuery();

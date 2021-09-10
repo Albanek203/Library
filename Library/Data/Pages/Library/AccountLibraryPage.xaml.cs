@@ -79,7 +79,9 @@ namespace Library.Data.Pages.Library {
             if (inputWindowCard.ShowDialog() == false) return;
             var inputWindowAmount = new InputWindow("Enter the amount:", MessageButton.CancelApply);
             if (inputWindowAmount.ShowDialog() == false) return;
+            int.TryParse(inputWindowAmount.Result, out var money);
             _userService.ReplenishMoney(_viewModelUser.CurrentUser.UserId, inputWindowAmount.Result);
+            _viewModelUser.Money += money;
         }
     }
 }
