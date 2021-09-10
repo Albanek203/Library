@@ -346,4 +346,13 @@
             <Setter Property="Fill" Value="Black" />
         </Style.Setters>
     </Style>
+
+
+    <Style x:Key="BorderBehindLiStyle" TargetType="Border">
+        <Style.Setters>
+            <Setter Property="Margin" Value="20,0,20,20"></Setter>
+            <Setter Property="Background" Value="#424242"></Setter>
+            <Setter Property="Height" Value="400" />
+        </Style.Setters>
+    </Style>
 </ResourceDictionary>

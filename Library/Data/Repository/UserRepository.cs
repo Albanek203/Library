@@ -106,6 +106,13 @@ namespace Library.Data.Repository {
             _sqlConnection.Close();
             return res != 0;
         }
+        public void AddAdvancedAccess(int userId) {
+            var sqlString = $"UPDATE Users SET AdvancedAccess = '1' WHERE Users.Id = {userId}";
+            var cmd       = new SqlCommand(sqlString, _sqlConnection);
+            _sqlConnection.Open();
+            cmd.ExecuteNonQuery();
+            _sqlConnection.Close();
+        }
         public void ChangePhoto(int userId, string url) {
             var imgBytes  = ImageConvert.FromBitmapImageToBytes(new BitmapImage(new Uri(url)));
             var sqlString = $"UPDATE Users SET [Image] = @Content WHERE Id = @UserId";

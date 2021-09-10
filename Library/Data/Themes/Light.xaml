@@ -345,4 +345,12 @@
             <Setter Property="Fill" Value="White" />
         </Style.Setters>
     </Style>
+
+    <Style x:Key="BorderBehindLiStyle" TargetType="Border">
+        <Style.Setters>
+            <Setter Property="Margin" Value="20,0,20,20"></Setter>
+            <Setter Property="Background" Value="WhiteSmoke"></Setter>
+            <Setter Property="Height" Value="400" />
+        </Style.Setters>
+    </Style>
 </ResourceDictionary>

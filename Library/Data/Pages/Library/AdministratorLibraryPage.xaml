@@ -7,6 +7,7 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d"
       Title="AdministratorLibraryPage" Height="670" Width="1280">
+
     <Grid>
         <Grid.Background>
             <LinearGradientBrush StartPoint="0.1,0" EndPoint="0.8,1">
@@ -69,29 +70,25 @@
                          materialDesign:HintAssist.Hint="Search user"
                          TextChanged="TxtSearchUser_OnTextChanged" />
             </StackPanel>
-            <ListView Name="ListBoxUser"
-                      Height="400"
-                      Width="600"
-                      FontSize="16"
-                      Margin="0,0,0,20">
-                <ListView.Template>
-                    <ControlTemplate>
-                        <Border CornerRadius="0,0,20,20" Background="WhiteSmoke">
-                            <ItemsPresenter />
-                        </Border>
-                    </ControlTemplate>
-                </ListView.Template>
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" />
-                        <GridViewColumn Header="Surname" DisplayMemberBinding="{Binding Surname}" />
-                        <GridViewColumn Header="Mail" DisplayMemberBinding="{Binding Email}" />
-                    </GridView>
-                </ListView.View>
-                <ListView.Effect>
-                    <DropShadowEffect BlurRadius="50" Color="White" />
-                </ListView.Effect>
-            </ListView>
+            <Border Style="{DynamicResource BorderBehindLiStyle}">
+                <ListView Name="ListBoxUser"
+                          Height="400"
+                          Width="600"
+                          FontSize="16"
+                          Margin="0,0,0,20">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" />
+                            <GridViewColumn Header="Surname" DisplayMemberBinding="{Binding Surname}" />
+                            <GridViewColumn Header="Mail" DisplayMemberBinding="{Binding Email}" />
+                        </GridView>
+                    </ListView.View>
+                    <ListView.Effect>
+                        <DropShadowEffect BlurRadius="50" Color="White" />
+                    </ListView.Effect>
+                </ListView>
+            </Border>
+
             <Button Background="Red"
                     Foreground="White"
                     FontWeight="Bold"

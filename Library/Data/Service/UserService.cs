@@ -16,5 +16,6 @@ namespace Library.Data.Service {
         public void ChangeLogin(int userId, string newLogin) => _userRepository.ChangeLogin(userId, newLogin);
         public void ChangePassword(int userId, string newPassword) =>
             _userRepository.ChangePassword(userId, newPassword);
+        public void AddAdvancedAccess(int userId) => _userRepository.AddAdvancedAccess(userId);
     }
 }
