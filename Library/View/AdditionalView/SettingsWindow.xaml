@@ -13,19 +13,17 @@
             <TextBlock Text="Change Theme"
                        Margin="0,20,0,0"
                        Style="{DynamicResource TitleText}" />
-            <ComboBox
-                Name="ThemeSelector"
-                SelectedIndex="1"
-                Width="200"
-                Margin="0,10,0,0"
-                Style="{DynamicResource ThemeSelectorStyle}"
-                ItemsSource="{Binding ThemesList }"
-                SelectionChanged="ThemeSelector_OnSelectionChanged" />
+            <ComboBox Name="ThemeSelector"
+                      Width="200"
+                      Margin="0,10,0,0"
+                      Style="{DynamicResource ThemeSelectorStyle}"
+                      ItemsSource="{Binding ThemesList }"
+                      SelectionChanged="ThemeSelector_OnSelectionChanged" />
             <Button Content="Apply"
                     Width="260"
                     Margin="0,100,0,0"
                     Style="{DynamicResource ButtonStyle}"
-                    Click="ButtonApply_OnClick"/>
+                    Click="ButtonApply_OnClick" />
         </StackPanel>
     </Grid>
 </Window>

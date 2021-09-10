@@ -8,8 +8,9 @@ namespace Library.View.AdditionalView {
         private readonly ViewModelTheme _viewModelTheme;
         public SettingsWindow(ViewModelTheme viewModelTheme) {
             InitializeComponent();
-            DataContext     = viewModelTheme;
-            _viewModelTheme = viewModelTheme;
+            DataContext                 = viewModelTheme;
+            _viewModelTheme             = viewModelTheme;
+            ThemeSelector.SelectedIndex = (int)viewModelTheme.Theme;
         }
         private void ThemeSelector_OnSelectionChanged(object sender, SelectionChangedEventArgs e) {
             var themeId = ThemeSelector.SelectedIndex;
