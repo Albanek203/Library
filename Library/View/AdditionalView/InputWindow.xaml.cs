@@ -3,11 +3,9 @@ using System.Windows;
 using Library.Data.Enumeration;
 
 namespace Library.View.AdditionalView {
-    /// <summary>
-    /// Interaction logic for InformationWindow.xaml
-    /// </summary>
-    public partial class InformationWindow {
-        public InformationWindow(string information, MessageButton messageButton) {
+    public partial class InputWindow {
+        public string Result;
+        public InputWindow(string description, MessageButton messageButton) {
             InitializeComponent();
             switch (messageButton) {
                 case MessageButton.Ok:
@@ -29,9 +27,12 @@ namespace Library.View.AdditionalView {
                 default:
                     throw new ArgumentOutOfRangeException(nameof(messageButton), messageButton, null);
             }
-            TxtInformation.Text = information;
+            TxtDescription.Text = description;
         }
-        private void FirstButton_OnClick(object  sender, RoutedEventArgs e) { DialogResult = true; }
+        private void FirstButton_OnClick(object sender, RoutedEventArgs e) {
+            Result       = TxtResult.Text;
+            DialogResult = true;
+        }
         private void SecondButton_OnClick(object sender, RoutedEventArgs e) { DialogResult = false; }
     }
 }

@@ -11,6 +11,14 @@ namespace Library.Infrastructure {
             services.AddTransient<LoginService>();
             services.AddTransient<UserRepository>();
             services.AddTransient<UserService>();
+            services.AddTransient<AuthorRepository>();
+            services.AddTransient<AuthorService>();
+            services.AddTransient<BookCategoriesRepository>();
+            services.AddTransient<BookCategoriesService>();
+            services.AddTransient<BookRepository>();
+            services.AddTransient<BookService>();
+            services.AddTransient<ReceivedBooksRepository>();
+            services.AddTransient<ReceivedBooksService>();
         }
     }
 }

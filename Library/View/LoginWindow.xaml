@@ -63,14 +63,14 @@
                                Style="{DynamicResource ClickableTextStyle}"
                                MouseDown="CreateAccount_OnMouseDown" />
                 </StackPanel>
-                <ComboBox Grid.Column="2"
-                          Name="ThemeSelector"
-                          HorizontalAlignment="Right"
-                          VerticalAlignment="Top"
-                          SelectedIndex="1"
-                          Style="{DynamicResource ThemeSelectorStyle}"
-                          ItemsSource="{Binding ThemesList }"
-                          SelectionChanged="ThemeSelector_OnSelectionChanged" />
+                <Button Grid.Column="2" ToolTip="Settings"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Style="{DynamicResource ButtonLibraryHeadStyle}"
+                        Click="ButtonSettings_OnClick">
+                    <materialDesign:PackIcon Kind="Settings" Width="40" Height="40"
+                                             Style="{DynamicResource PickIconStyle}" />
+                </Button>
             </Grid>
         </Border>
     </Grid>

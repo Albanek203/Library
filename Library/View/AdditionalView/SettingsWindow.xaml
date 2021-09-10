@@ -1,0 +1,31 @@
+﻿<Window x:Class="Library.View.AdditionalView.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:Library.View.AdditionalView"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterOwner"
+        Style="{DynamicResource WindowStyle}"
+        Title="SettingsWindow" Height="300" Width="300">
+    <Grid Style="{DynamicResource BackgroundGridStyle}">
+        <StackPanel>
+            <TextBlock Text="Change Theme"
+                       Margin="0,20,0,0"
+                       Style="{DynamicResource TitleText}" />
+            <ComboBox
+                Name="ThemeSelector"
+                SelectedIndex="1"
+                Width="200"
+                Margin="0,10,0,0"
+                Style="{DynamicResource ThemeSelectorStyle}"
+                ItemsSource="{Binding ThemesList }"
+                SelectionChanged="ThemeSelector_OnSelectionChanged" />
+            <Button Content="Apply"
+                    Width="260"
+                    Margin="0,100,0,0"
+                    Style="{DynamicResource ButtonStyle}"
+                    Click="ButtonApply_OnClick"/>
+        </StackPanel>
+    </Grid>
+</Window>

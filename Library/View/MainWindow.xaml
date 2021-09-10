@@ -3,19 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Library.View"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:viewmodel="clr-namespace:Library.ViewModel"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Style="{DynamicResource WindowStyle}"
-        Title="MainWindow" Height="720" Width="1280">
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../Data/Themes/Dark.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
+        Title="MainWindow" Height="720" Width="1280" d:DataContext="{d:DesignInstance }">
 
     <Grid Style="{DynamicResource BackgroundGridStyle}">
         <Grid.RowDefinitions>
@@ -42,7 +35,8 @@
                 <Button ToolTip="Books"
                         Style="{DynamicResource ButtonLibraryHeadStyle}"
                         Click="ButtonBooksPage_OnClick">
-                    <materialDesign:PackIcon Kind="Book" Width="40" Height="40" Style="{DynamicResource PickIconStyle}" />
+                    <materialDesign:PackIcon Kind="Book" Width="40" Height="40"
+                                             Style="{DynamicResource PickIconStyle}" />
                 </Button>
                 <Button ToolTip="Account"
                         Style="{DynamicResource ButtonLibraryHeadStyle}"
@@ -50,28 +44,45 @@
                     <materialDesign:PackIcon Kind="AccountCircle" Width="40" Height="40"
                                              Style="{DynamicResource PickIconStyle}" />
                 </Button>
+                <Button ToolTip="Settings"
+                        Style="{DynamicResource ButtonLibraryHeadStyle}"
+                        Click="ButtonSettings_OnClick">
+                    <materialDesign:PackIcon Kind="Settings" Width="40" Height="40"
+                                             Style="{DynamicResource PickIconStyle}" />
+                </Button>
                 <Button Name="ButtonAdminTools"
                         ToolTip="Admin Tools"
+                        Visibility="Collapsed"
                         Style="{DynamicResource ButtonLibraryHeadStyle}"
                         Click="ButtonAdministrator_OnClick">
                     <materialDesign:PackIcon Kind="CrownOutline" Width="40" Height="40" Foreground="Gold" />
                 </Button>
-
                 <Rectangle Width="5" Margin="20,0,20,0" Fill="#50010101" />
 
                 <Ellipse Height="40" Width="40"
                          Name="UserIco"
-                         ToolTip="User Photo">
+                         ToolTip="My Photo">
                     <Ellipse.Fill>
-                        <ImageBrush ImageSource="../Data/Images/unknowUser.jpeg" />
+                        <ImageBrush ImageSource="{Binding ImageBrush, UpdateSourceTrigger=PropertyChanged}" />
                     </Ellipse.Fill>
                 </Ellipse>
                 <TextBlock Name="UserName"
-                           ToolTip="User name"
+                           ToolTip="My name"
                            Margin="20,0,20,0"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
+                           Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
                            Style="{DynamicResource  TextStyle}" />
+                <TextBlock Name="UserMoney"
+                           ToolTip="My money"
+                           Margin="20,0,20,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Text="{Binding Money, UpdateSourceTrigger=PropertyChanged}"
+                           Style="{DynamicResource  TextStyle}" />
+                <materialDesign:PackIcon Kind="Money" Width="40" Height="40"
+                                         VerticalAlignment="Center"
+                                         Style="{DynamicResource PickIconStyle}" />
             </StackPanel>
         </DockPanel>
         <Border Grid.Row="1" Style="{DynamicResource BorderMainBgGridStyle}">

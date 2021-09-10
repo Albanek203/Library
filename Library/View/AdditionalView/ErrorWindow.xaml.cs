@@ -21,6 +21,12 @@ namespace Library.View.AdditionalView {
                     SecondButton.Visibility = Visibility.Visible;
                     SecondButton.Content    = "No";
                     break;
+                case MessageButton.CancelApply:
+                    FistButton.Visibility   = Visibility.Visible;
+                    FistButton.Content      = "Apply";
+                    SecondButton.Visibility = Visibility.Visible;
+                    SecondButton.Content    = "Cancel";
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(messageButton), messageButton, null);
             }

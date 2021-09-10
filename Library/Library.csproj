@@ -19,7 +19,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Remove="Data\Images\unknowUser.jpeg" />
-    <Content Include="Data\Images\unknowUser.jpeg">
+    <None Remove="Data\Images\unknownUser.jpeg" />
+    <Content Include="Data\Images\unknownUser.jpeg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

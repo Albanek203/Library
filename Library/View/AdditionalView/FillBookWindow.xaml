@@ -1,0 +1,143 @@
+﻿<Window x:Class="Library.View.AdditionalView.FillBookWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:Library.View.AdditionalView"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="FillBookWindow" Height="450" Width="800">
+
+    <Grid MouseLeftButtonDown="UIFillBook_OnMouseDown">
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0.1,0" EndPoint="0.9,1">
+                <GradientStop Color="#FFE63070" Offset="1" />
+                <GradientStop Color="#FFFE8704" Offset="0" />
+            </LinearGradientBrush>
+        </Grid.Background>
+        <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Vertical">
+                <Button Name="BookImg"
+                        ToolTip="Select a photo for the book "
+                        Height="330" Width="280" Margin="35" Background="#202020"
+                        materialDesign:ButtonAssist.CornerRadius="0"
+                        AllowDrop="True"
+                        Style="{DynamicResource UserPhotoStyleWithoutUpload}"
+                        Click="BookImg_OnClick"
+                        MouseEnter="BookImg_OnMouseEnter"
+                        MouseLeave="BookImg_OnMouseLeave"
+                        Drop="BookImg_OnDrop" />
+                <StackPanel Orientation="Vertical"
+                            Margin="40,-30,38,0">
+                    <Button Content="Cancel"
+                            ToolTip="Cancel the action"
+                            Background="#FFE63070"
+                            Margin="0,10,0,0"
+                            BorderThickness="0"
+                            Height="40"
+                            FontSize="20"
+                            Foreground="WhiteSmoke"
+                            FontWeight="Bold"
+                            Click="ButtonCancel_OnClick" />
+                    <Button Content="Save"
+                            ToolTip="Save book"
+                            Margin="0,10,0,0"
+                            BorderThickness="0"
+                            Height="40"
+                            FontSize="20"
+                            Foreground="WhiteSmoke"
+                            FontWeight="Bold"
+                            Click="ButtonOk_OnClick" />
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Width="400" Margin="0,30,0,0">
+                <TextBlock Foreground="WhiteSmoke"
+                           FontSize="20"
+                           FontWeight="Bold">
+                    Enter book name:
+                </TextBlock>
+                <TextBox Name="TxtBookName"
+                         ToolTip="Enter book name"
+                         Foreground="WhiteSmoke"
+                         FontSize="18"
+                         materialDesign:ColorZoneAssist.Mode="Dark"
+                         Margin="0,10,0,10"
+                         TextChanged="TxtBookName_OnTextChanged" />
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Foreground="WhiteSmoke"
+                                   FontSize="18"
+                                   FontWeight="Bold">
+                            Enter author`s name:
+                        </TextBlock>
+                        <TextBox Name="TxtAuthorName"
+                                 ToolTip="Enter author`s name"
+                                 Foreground="WhiteSmoke"
+                                 FontSize="18"
+                                 Margin="0,10,0,10"
+                                 TextChanged="TxtAuthorName_OnTextChanged" />
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="20,0,0,0">
+                        <TextBlock Foreground="WhiteSmoke"
+                                   FontSize="18"
+                                   FontWeight="Bold">
+                            Enter author`s surname:
+                        </TextBlock>
+                        <TextBox Name="TxtAuthorSurname"
+                                 ToolTip="Enter author`s surname"
+                                 Foreground="WhiteSmoke"
+                                 FontSize="18"
+                                 Margin="0,10,0,10"
+                                 TextChanged="TxtAuthorSurname_OnTextChanged" />
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Foreground="WhiteSmoke"
+                                   FontSize="18"
+                                   FontWeight="Bold">
+                            Enter book category:
+                        </TextBlock>
+                        <ComboBox Name="CmbCategories"
+                                  ToolTip="Enter book category"
+                                  Margin="0,10,0,10"
+                                  FontSize="18"
+                                  Foreground="WhiteSmoke"
+                                  materialDesign:ColorZoneAssist.Mode="Dark"
+                                  SelectionChanged="CmbCategories_OnSelectionChanged" />
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="20,0,0,0">
+                        <TextBlock Foreground="WhiteSmoke"
+                                   FontSize="18"
+                                   FontWeight="Bold">
+                            Enter edition year:
+                        </TextBlock>
+                        <TextBox Name="TxtYearEdition"
+                                 ToolTip="Enter edition year"
+                                 Foreground="WhiteSmoke"
+                                 FontSize="18"
+                                 Margin="0,10,0,10"
+                                 TextChanged="TxtYearEdition_OnTextChanged"
+                                 PreviewTextInput="UIElement_OnPreviewTextInput" />
+                    </StackPanel>
+                </StackPanel>
+                <TextBlock Foreground="WhiteSmoke"
+                           FontSize="18"
+                           FontWeight="Bold">
+                    Enter description:
+                </TextBlock>
+                <ScrollViewer>
+                    <TextBox Name="TxtShortDescription"
+                             ToolTip="Enter description"
+                             AcceptsReturn="True"
+                             TextWrapping="Wrap"
+                             Margin="0,10,0,0"
+                             Foreground="WhiteSmoke"
+                             FontSize="18"
+                             Height="180"
+                             TextChanged="TxtShortDescription_OnTextChanged" />
+                </ScrollViewer>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

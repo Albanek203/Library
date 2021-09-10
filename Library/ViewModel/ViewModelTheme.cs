@@ -5,6 +5,12 @@ using Library.Data.Enumeration;
 
 namespace Library.ViewModel {
     public class ViewModelTheme : ViewModelBase {
+        public ViewModelTheme() {
+            ThemesList = new ObservableCollection<object>();
+            foreach (var i in Enum.GetValues(typeof(Themes))) { ThemesList.Add(i); }
+            Theme = Themes.Dark;
+            ChangeTheme(Theme);
+        }
         private Themes _theme;
         public Themes Theme {
             get => _theme;
@@ -14,12 +20,6 @@ namespace Library.ViewModel {
             }
         }
         public ObservableCollection<object> ThemesList { get; }
-        public ViewModelTheme() {
-            ThemesList = new ObservableCollection<object>();
-            foreach (var i in Enum.GetValues(typeof(Themes))) { ThemesList.Add(i); }
-            Theme = Themes.Dark;
-            ChangeTheme(Theme);
-        }
         public void ChangeTheme(Themes theme) {
             _theme = theme;
             var name = theme.ToString();

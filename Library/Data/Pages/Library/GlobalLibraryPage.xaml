@@ -5,8 +5,44 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:Library.Data.Pages.Library"
       mc:Ignorable="d"
-      Title="GlobalLibraryPage" Height="450" Width="800">
-    <Grid>
-        
+      Title="GlobalLibraryPage" Height="670" Width="1280">
+
+    <Grid Background="Transparent">
+        <StackPanel Orientation="Horizontal">
+            <StackPanel Width="530"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <Image Name="BookImg"
+                       Height="450" Width="350"
+                       Stretch="Fill" />
+            </StackPanel>
+            <Grid Width="700">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Text="{Binding BookName}"
+                           TextAlignment="Center"
+                           FontSize="40"
+                           Style="{DynamicResource TitleText}" />
+                <TextBlock Grid.Row="1" Name="AuthorFullName"
+                           TextAlignment="Center"
+                           FontStyle="Italic"
+                           Style="{DynamicResource TextStyle}" />
+                <ScrollViewer Grid.Row="2"
+                              Margin="0,20,0,0"
+                              Height="520"
+                              VerticalScrollBarVisibility="Auto">
+                    <TextBlock Text="{Binding Description}"
+                               TextAlignment="Center"
+                               TextWrapping="Wrap"
+                               FontSize="25"
+                               Style="{DynamicResource TextStyle}">
+                        <LineBreak />
+                    </TextBlock>
+                </ScrollViewer>
+            </Grid>
+        </StackPanel>
     </Grid>
 </Page>

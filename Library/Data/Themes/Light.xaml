@@ -30,6 +30,11 @@
             </Setter>
         </Style.Setters>
     </Style>
+    <Style x:Key="BackgroundGridToolBar" TargetType="Grid">
+        <Style.Setters>
+            <Setter Property="Background" Value="#bcbcbc" />
+        </Style.Setters>
+    </Style>
     <Style x:Key="BorderBgGridStyle" TargetType="Border">
         <Style.Setters>
             <Setter Property="Background">
@@ -142,6 +147,12 @@
             <Setter Property="Padding" Value="10,0,0,0" />
         </Style.Setters>
     </Style>
+    <Style x:Key="ComboBoxStyle" TargetType="ComboBox" BasedOn="{StaticResource MaterialDesignComboBox}">
+        <Style.Setters>
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Padding" Value="10,0,0,0" />
+        </Style.Setters>
+    </Style>
     <Style x:Key="BorderMainBgGridStyle" TargetType="Border">
         <Style.Setters>
             <Setter Property="Background">
@@ -208,13 +219,6 @@
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter TargetName="border" Property="Background" Value="#50010101" />
                         </Trigger>
-                        <Trigger Property="IsKeyboardFocused" Value="true">
-                            <Setter Property="materialDesign:ShadowAssist.Darken"
-                                    Value="True" />
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Opacity" Value="0.23" />
-                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -267,16 +271,78 @@
                                                              Style="{DynamicResource PickIconStyle}" />
                                 </Setter.Value>
                             </Setter>
+                            <Setter TargetName="border" Property="Opacity" Value="0.2" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="False">
                             <Setter Property="Content" Value="" />
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Opacity" Value="0.23" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+    <Style x:Key="ButtonBookStyle" TargetType="{x:Type ButtonBase}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidForegroundBrush}" />
+        <Setter Property="materialDesign:ButtonProgressAssist.IndicatorForeground"
+                Value="{DynamicResource PrimaryHueMidForegroundBrush}" />
+        <Setter Property="materialDesign:ButtonProgressAssist.IndicatorBackground"
+                Value="{DynamicResource PrimaryHueMidBrush}" />
+        <Setter Property="materialDesign:RippleAssist.Feedback" Value="White" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="materialDesign:ShadowAssist.ShadowDepth" Value="Depth1" />
+        <Setter Property="TextBlock.FontWeight" Value="Medium" />
+        <Setter Property="TextBlock.FontSize" Value="14" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="materialDesign:ButtonProgressAssist.IsIndicatorVisible" Value="False" />
+        <Setter Property="materialDesign:ButtonProgressAssist.Opacity" Value=".4" />
+        <Setter Property="materialDesign:ButtonAssist.CornerRadius" Value="2" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ButtonBase}">
+                    <Grid>
+                        <AdornerDecorator
+                            CacheMode="{Binding RelativeSource={RelativeSource Self}, Path=(materialDesign:ShadowAssist.CacheMode)}">
+                            <Grid>
+                                <Border Background="{TemplateBinding Background}"
+                                        CornerRadius="{Binding Path=(materialDesign:ButtonAssist.CornerRadius), RelativeSource={RelativeSource TemplatedParent}}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        x:Name="border"
+                                        Effect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(materialDesign:ShadowAssist.ShadowDepth), Converter={x:Static materialDesign:ShadowConverter.Instance}}" />
+                            </Grid>
+                        </AdornerDecorator>
+                        <materialDesign:Ripple Content="{TemplateBinding Content}"
+                                               ContentTemplate="{TemplateBinding ContentTemplate}"
+                                               Focusable="False"
+                                               ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                               HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                               VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                               Padding="{TemplateBinding Padding}"
+                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                            <materialDesign:Ripple.Clip>
+                                <MultiBinding Converter="{StaticResource BorderClipConverter}">
+                                    <Binding ElementName="border" Path="ActualWidth" />
+                                    <Binding ElementName="border" Path="ActualHeight" />
+                                    <Binding ElementName="border" Path="CornerRadius" />
+                                    <Binding ElementName="border" Path="BorderThickness" />
+                                </MultiBinding>
+                            </materialDesign:Ripple.Clip>
+                        </materialDesign:Ripple>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="border" Property="Opacity" Value="0.6" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="EllipseAccountStyle" TargetType="Ellipse">
+        <Style.Setters>
+            <Setter Property="Fill" Value="White" />
+        </Style.Setters>
     </Style>
 </ResourceDictionary>

@@ -1,9 +1,9 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using Library.Data.Enumeration;
 using Library.Data.Models;
 using Library.Data.Service;
+using Library.View.AdditionalView;
 using Library.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,20 +12,16 @@ namespace Library.View {
     /// Interaction logic for LoginWindow.xaml
     /// </summary>
     public partial class LoginWindow {
-        private readonly LoginService   _loginService;
-        private readonly ViewModelTheme _viewModelTheme;
-        private readonly UserService    _userService;
-        private readonly MainWindow     _mainWindow;
-        private          User           _user;
-        public LoginWindow(ViewModelTheme viewModelTheme, LoginService loginService, UserService userService, User user
-                         , MainWindow     mainWindow) {
+        private readonly ViewModelUser _viewModelUser;
+        private readonly LoginService  _loginService;
+        private readonly UserService   _userService;
+        private readonly User          _user;
+        public LoginWindow(ViewModelUser viewModelUser, LoginService loginService, UserService userService, User user) {
             InitializeComponent();
-            DataContext     = viewModelTheme;
-            _loginService   = loginService;
-            _viewModelTheme = viewModelTheme;
-            _userService    = userService;
-            _user           = user;
-            _mainWindow     = mainWindow;
+            _loginService  = loginService;
+            _userService   = userService;
+            _user          = user;
+            _viewModelUser = viewModelUser;
         }
 
 #region Window Control
@@ -44,8 +40,10 @@ namespace Library.View {
 
             var success = _loginService.Login(TxtUserLogin.Text, TxtUserPassword.Password);
             if (success > 0) {
-                _user = _userService.Find(new User { UserId = success });
-                _mainWindow.Show();
+                var user = _userService.Find(new User { UserId = success });
+                _viewModelUser.SetUser(user);
+                var mainWindow = App.ServiceProvider.GetService<MainWindow>();
+                mainWindow?.Show();
                 Close();
                 return;
             }
@@ -58,9 +56,14 @@ namespace Library.View {
             registrationWindow?.ShowDialog();
             Show();
         }
-        private void ThemeSelector_OnSelectionChanged(object sender, SelectionChangedEventArgs e) {
-            var themeId = ThemeSelector.SelectedIndex;
-            _viewModelTheme.ChangeTheme((Themes)themeId);
+        private void ButtonSettings_OnClick(object sender, RoutedEventArgs e) {
+            Effect = new System.Windows.Media.Effects.BlurEffect { Radius = 100 };
+            var settings = App.ServiceProvider.GetService<SettingsWindow>();
+            if (settings != null) {
+                settings.Owner = this;
+                settings.ShowDialog();
+            }
+            Effect = new System.Windows.Media.Effects.BlurEffect { Radius = 0 };
         }
     }
 }

@@ -1,0 +1,53 @@
+﻿<Page x:Class="Library.Data.Pages.Account.ShopSubscriptionPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d"
+      Title="ShopSubscriptionPage" Height="470" Width="880">
+    <Border Background="Transparent"
+            Height="470"
+            Width="880">
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Button Grid.Row="0"
+                    ToolTip="Buy silver subscription"
+                    FontSize="30"
+                    Width="400"
+                    Height="100"
+                    Content="Silver"
+                    Background="Silver"
+                    BorderThickness="0"
+                    materialDesign:ButtonAssist.CornerRadius="20"
+                    Click="BuyElement_OnClick" />
+            <Button Grid.Row="1"
+                    ToolTip="Buy gold subscription"
+                    FontSize="30"
+                    Width="400"
+                    Height="100"
+                    Content="Gold"
+                    Background="Gold"
+                    BorderThickness="0"
+                    materialDesign:ButtonAssist.CornerRadius="20"
+                    Click="BuyElement_OnClick" />
+            <Button Grid.Row="2"
+                    ToolTip="Buy diamond subscription"
+                    FontSize="30"
+                    Width="400"
+                    Height="100"
+                    Content="Diamond"
+                    Background="#6C59A8"
+                    BorderThickness="0"
+                    materialDesign:ButtonAssist.CornerRadius="20"
+                    Click="BuyElement_OnClick" />
+        </Grid>
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="30" Color="WhiteSmoke" />
+        </Border.Effect>
+    </Border>
+</Page>

@@ -5,14 +5,15 @@ using Library.View.AdditionalView;
 namespace Library.Data.Models {
     public static class MessageWindow {
         private static void ApplyEffect(Window window, int radius) {
-            var objBlur = new System.Windows.Media.Effects.BlurEffect { Radius = radius };
-            window.Effect = objBlur;
+            if (window == null) return;
+            window.Effect = new System.Windows.Media.Effects.BlurEffect { Radius = radius };
         }
         public static bool Show(Window ownWindow, string message, TypeWindow type, MessageButton messageButton) {
             var result = false;
             if (type == TypeWindow.ErrorWindow) {
                 ApplyEffect(ownWindow, 100);
                 var errorWindow = new ErrorWindow(message, messageButton) { Owner = ownWindow };
+                if (ownWindow == null) errorWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 // ReSharper disable once PossibleInvalidOperationException
                 result = (bool)errorWindow.ShowDialog();
                 ApplyEffect(ownWindow, 0);
@@ -20,6 +21,7 @@ namespace Library.Data.Models {
             else if (type == TypeWindow.Information) {
                 ApplyEffect(ownWindow, 100);
                 var informationWindow = new InformationWindow(message, messageButton) { Owner = ownWindow };
+                if (ownWindow == null) informationWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 // ReSharper disable once PossibleInvalidOperationException
                 result = (bool)informationWindow.ShowDialog();
                 ApplyEffect(ownWindow, 0);
